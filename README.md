@@ -14,6 +14,14 @@ This project is a web application that allows users to search for medications re
 - **Material-UI**: A popular React UI framework for building responsive and visually appealing components.
 - **Axios**: For making HTTP requests to the OpenFDA API.
 
+## 🚨 Important Note About OpenFDA API
+
+The OpenFDA API imposes a limit on the `skip` parameter, which must be 25000 or less. If this limit is exceeded, the API returns an error. Below is a screenshot of the error message:
+
+![OpenFDA API Error](https://i.ibb.co/pr2hY8B/Screenshot-from-2024-06-19-15-23-30.png)
+
+To prevent this error, the application limits the `totalResults` to 25000 in the `useSearchMedicationsQuery` hook. This ensures that the application handles large datasets gracefully without exceeding API limits.
+
 ## 🗂️ Project Structure
 
 Here is the project structure for better understanding and navigation:
