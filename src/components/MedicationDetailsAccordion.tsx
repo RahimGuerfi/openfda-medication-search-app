@@ -22,14 +22,14 @@ export const MedicationDetailsAccordion = ({ title, data }: Props) => {
         aria-controls={`${title}-content`}
         id={`${title}-header`}
         sx={{
-          fontSize: "0.75rem",
+          fontSize: "0.85rem",
         }}
       >
         {title}
       </AccordionSummary>
       <AccordionDetails>
         {data.map((content, index) => (
-          <Typography key={index} variant="body2">
+          <Typography key={index} fontSize="0.75rem">
             {content}
           </Typography>
         ))}
