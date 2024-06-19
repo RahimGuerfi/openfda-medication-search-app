@@ -27,7 +27,7 @@ export const MedicationCard = ({ medication }: Props) => {
                 mr: 1,
               }}
             />
-            <Typography variant="h6">
+            <Typography variant="body1">
               {medication.openfda.brand_name?.[0] ||
                 medication.openfda.generic_name?.[0] ||
                 "Unknown Medication"}

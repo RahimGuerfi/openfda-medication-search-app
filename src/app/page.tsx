@@ -57,7 +57,7 @@ export default function MedicationsPage() {
       >
         openFDA Search
       </Typography>
-      <Typography textAlign="center" variant="subtitle2" gutterBottom>
+      <Typography textAlign="center" variant="body1" gutterBottom>
         Search for medications registered in the US using the OpenFDA API
       </Typography>
 
@@ -87,12 +87,12 @@ export default function MedicationsPage() {
         >
           {totalResults > 0 && (
             <Pagination
-              count={Math.ceil(Math.min(totalResults) / ITEMS_PER_PAGE)}
+              count={Math.ceil(totalResults / ITEMS_PER_PAGE)}
               page={page}
               onChange={(_, page) => handlePageChange(page)}
               color="primary"
               variant="text"
-              disabled={isPreviousData}
+              disabled={isFetching}
             />
           )}
 
