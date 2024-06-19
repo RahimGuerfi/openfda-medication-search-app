@@ -25,15 +25,12 @@ export const SearchBar = ({
     <Box display="flex" justifyContent="center" my={4}>
       <TextField
         label="Search for medications"
-        variant="filled"
-        size="small"
+        variant="outlined"
         sx={{
           maxWidth: 300,
           flex: 1,
           mr: 1,
-          "& .MuiFilledInput-root": {
-            backgroundColor: "#ffffff",
-          },
+          backgroundColor: "#FFF",
         }}
         value={value}
         onChange={(e) => onSetValue(e.target.value)}
