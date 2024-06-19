@@ -1,95 +1,104 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import { MedicationsList } from "@/components/MedicationsList";
+import { SearchBar } from "@/components/SearchBar";
+import { ITEMS_PER_PAGE } from "@/config/constants";
+import { useSearchMedicationsQuery } from "@/hooks/useSearchMedicationsQuery";
+import {
+  Alert,
+  Box,
+  Container,
+  Pagination,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
+
+export default function MedicationsPage() {
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [triggerRefetch, setTriggerRefetch] = useState(false);
+
+  const { totalResults, data, isError, isFetching, refetch, isPreviousData } =
+    useSearchMedicationsQuery(query, page, ITEMS_PER_PAGE);
+
+  const handleSearch = async () => {
+    if (!query.length) return;
+
+    // Reset page number to 1
+    setPage(1);
+    setTriggerRefetch(true);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage === page) return;
+    setPage(newPage);
+
+    setTriggerRefetch(true);
+  };
+
+  // Trigger refetch when triggerRefetch is true
+  useEffect(() => {
+    if (triggerRefetch) {
+      refetch();
+      setTriggerRefetch(false);
+    }
+  }, [triggerRefetch]);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <Container maxWidth="lg" sx={{ py: { xs: 8, sm: 16 } }}>
+      <Typography
+        textAlign="center"
+        variant="h2"
+        sx={{
+          color: "primary.main",
+        }}
+        gutterBottom
+      >
+        openFDA Search
+      </Typography>
+      <Typography textAlign="center" variant="subtitle2" gutterBottom>
+        Search for medications registered in the US using the OpenFDA API
+      </Typography>
+
+      <SearchBar
+        value={query}
+        onSetValue={(value) => setQuery(value)}
+        handleSearch={handleSearch}
+        isLoading={isFetching}
+      />
+
+      {isError && (
+        <Box my={4}>
+          <Alert severity="error">
+            Oops! Something went wrong while fetching the data. Please try
+            again.
+          </Alert>
+        </Box>
+      )}
+
+      {!!data && !isError && (
+        <Stack
+          gap={4}
+          pt={4}
+          borderTop={1}
+          borderColor="white"
+          alignItems="center"
+        >
+          {totalResults > 0 && (
+            <Pagination
+              count={Math.ceil(Math.min(totalResults) / ITEMS_PER_PAGE)}
+              page={page}
+              onChange={(_, page) => handlePageChange(page)}
+              color="primary"
+              variant="text"
+              disabled={isPreviousData}
             />
-          </a>
-        </div>
-      </div>
+          )}
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <MedicationsList medications={data} />
+        </Stack>
+      )}
+    </Container>
   );
 }

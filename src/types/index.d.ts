@@ -1,6 +1,6 @@
 export interface ISearchMedicationsResponse {
   meta: IMeta;
-  results: IResult[];
+  results: IMedication[];
 }
 
 interface IMeta {
@@ -17,7 +17,7 @@ interface IResults {
   total: number;
 }
 
-interface IResult {
+export interface IMedication {
   spl_product_data_elements: string[];
   recent_major_changes?: string[];
   recent_major_changes_table?: string[];

@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
 import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "@/lib/queryClient";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "openFDA Medication Search",
@@ -19,10 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <QueryClientProvider client={queryClient}>
-          {children}
-          <ReactQueryDevtools initialIsOpen={false} />
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </QueryClientProvider>
       </body>
     </html>

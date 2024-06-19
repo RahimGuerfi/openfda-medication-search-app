@@ -3,3 +3,9 @@
   padding: 0;
   margin: 0;
 }
+
+body {
+  background-image: url("./pattern.jpeg");
+  background-position: left top;
+  background-repeat: repeat;
+}
