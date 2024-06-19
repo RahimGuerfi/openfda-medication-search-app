@@ -8,7 +8,7 @@ export const useSearchMedicationsQuery = (
   limit = ITEMS_PER_PAGE
 ) => {
   const { data, ...rest } = useQuery({
-    queryKey: ["medications", page],
+    queryKey: ["medications", query, page],
     queryFn: () => searchMedications(query, (page - 1) * limit, limit),
     keepPreviousData: true,
     enabled: false,
