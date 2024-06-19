@@ -15,10 +15,9 @@ export const searchMedications = async (
   limit = ITEMS_PER_PAGE
 ) => {
   const { data } = await api.get<ISearchMedicationsResponse>(
-    "drug/label.json",
+    `drug/label.json?search=openfda.brand_name:${query}*+openfda.generic_name:${query}*`,
     {
       params: {
-        search: query,
         skip,
         limit,
       },
