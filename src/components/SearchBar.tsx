@@ -26,11 +26,12 @@ export const SearchBar = ({
       <TextField
         label="Search for medications"
         variant="outlined"
+        fullWidth
         sx={{
-          maxWidth: 300,
-          flex: 1,
           mr: 1,
-          backgroundColor: "#FFF",
+          "& .MuiOutlinedInput-root": {
+            backgroundColor: "#ffffff",
+          },
         }}
         value={value}
         onChange={(e) => onSetValue(e.target.value)}
