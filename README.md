@@ -26,6 +26,10 @@ To prevent this from happening in my code, I limited `totalResults` to 25,000 in
 
 The search query now matches both the `openfda.brand_name` and `openfda.generic_name` fields using the `*` wildcard operator for more flexible searches.
 
+### Optimized Search Functionality
+
+To optimize the search functionality and improve code readability, I introduced a separate state for the search value and the query value. The query value is set to the search value only when the user clicks the search button. This ensures that `useQuery` fires only when the query or page values change, and not when the search value changes. This separation makes the code more readable and efficient.
+
 ## 📂 Project Structure
 
 Here is the project structure for better understanding and navigation:

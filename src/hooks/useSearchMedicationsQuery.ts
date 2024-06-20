@@ -11,7 +11,7 @@ export const useSearchMedicationsQuery = (
     queryKey: ["medications", query, page],
     queryFn: () => searchMedications(query, (page - 1) * limit, limit),
     keepPreviousData: true,
-    enabled: false,
+    enabled: !!query.length,
   });
 
   return {
