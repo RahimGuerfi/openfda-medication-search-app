@@ -22,7 +22,7 @@ export const SearchBar = ({
   };
 
   return (
-    <Box display="flex" justifyContent="center" my={4}>
+    <Box display="flex" justifyContent="center">
       <TextField
         label="Search for medications"
         variant="outlined"
