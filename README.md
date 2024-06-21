@@ -30,6 +30,23 @@ The search query now matches both the `openfda.brand_name` and `openfda.generic_
 
 To optimize the search functionality and improve code readability, I introduced a separate state for the search value and the query value. The query value is set to the search value only when the user clicks the search button. This ensures that `useQuery` fires only when the query or page values change, and not when the search value changes. This separation makes the code more readable and efficient.
 
+## 🔖 Bookmark Medications Feature
+
+I have added a new feature that allows users to bookmark their favorite medications for easy access later. Here's how it works:
+
+- **Search and Bookmark:**
+  - Users can search for medications using the search bar on the search page.
+  - Each medication card has a bookmark icon that users can click to save the medication.
+- **View Bookmarked Medications:**
+
+  - The page is split into two tabs using MUI Tabs:
+    - **Search Tab:** Allows users to search for medications.
+    - **Bookmarks Tab:** Displays the list of bookmarked medications.
+  - Bookmarked medications are persisted in localStorage, ensuring that bookmarks are retained even after the page is refreshed or the browser is closed.
+
+- **Technical Details:**
+  - Implemented using Zustand for state management to handle bookmarking operations.
+
 ## 📂 Project Structure
 
 Here is the project structure for better understanding and navigation:
