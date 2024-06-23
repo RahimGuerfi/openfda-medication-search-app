@@ -54,31 +54,33 @@ Here is the project structure for better understanding and navigation:
 ```
 src/
 ├── app
-│   ├── favicon.ico
-│   ├── globals.css
-│   ├── layout.tsx
-│   ├── medication
-│   │   └── [medicationId]
-│   │       └── page.tsx
-│   ├── page.tsx
-│   └── pattern.jpeg
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── medication
+│   │   └── [medicationId]
+│   │       └── page.tsx
+│   ├── page.tsx
+│   └── pattern.jpeg
 ├── components
-│   ├── FetchingMedicationError.tsx
-│   ├── MedicationCard.tsx
-│   ├── MedicationDetailsAccordion.tsx
-│   ├── MedicationDetails.tsx
-│   ├── MedicationsList.tsx
-│   └── SearchBar.tsx
+│   ├── BookmarkTab.tsx
+│   ├── FetchingMedicationError.tsx
+│   ├── MedicationCard.tsx
+│   ├── MedicationDetailsAccordion.tsx
+│   ├── MedicationDetails.tsx
+│   ├── MedicationsList.tsx
+│   ├── SearchBar.tsx
+│   └── SearchTab.tsx
 ├── config
-│   └── constants.ts
+│   └── constants.ts
 ├── hooks
-│   ├── useDebounce.ts
-│   └── useSearchMedicationsQuery.ts
+│   ├── useMedicationsBookmarkStore.ts
+│   └── useSearchMedicationsQuery.ts
 ├── lib
-│   ├── queryClient.ts
-│   └── theme.ts
+│   ├── queryClient.ts
+│   └── theme.ts
 ├── services
-│   └── api.ts
+│   └── api.ts
 └── types
     └── index.d.ts
 ```
